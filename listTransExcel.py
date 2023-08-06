@@ -41,12 +41,12 @@ with open(input_file, 'r' , encoding='utf-8') as f:
         brand_match = re.search(r"(兰蔻|雅诗兰黛|卡地亚|圣罗兰|蒂佳婷|cpb肌肤之钥|海蓝之谜|娇韵诗|阿玛尼|赫莲娜|科颜氏|Gucci|倩碧|黛珂|资生堂|馥蕾诗|欧莱雅|迪奥|莱珀妮|赫莲娜|娇兰|SK-II|植村秀|Tom Ford|NARS|MAC|魅可|whoo后|雅萌|ahc|飞利浦|百瑞德|兰芝|香奈儿|银座|衰败城市|伊菲丹|芭比布朗|祖玛龙|希思黎|碧欧泉|欧舒丹|修丽可|爱马仕|蔻依|祖玛珑|梅森马吉拉)", line)
        
         #根据单品名称匹配品牌
-        brand_match_skii = re.search(r"(SK2|sk2|skii|sk-ii|眼面套|神灯套|小灯泡|神仙水|大红瓶)", line)
+        brand_match_skii = re.search(r"(SK2|sk2|skii|sk-ii|眼面套|神灯套|小灯泡|神仙水|大红瓶|前男友|甄选三件套|增选3件套)", line)
         brand_match_ysld = re.search(r"(增量五件套|抗衰|红石榴|小棕瓶|抗蓝光|眼绷带|白金眼霜|白金粉底液|沁水|dw|原生液|樱花水|智妍|抗衰老|黑松露|白金面霜)", line)
-        brand_match_hlzm = re.search(r"(LAMER|Lamer|lamer|精粹水|精萃乳|海南之谜|舒缓喷雾|浓缩精华|经典面霜)", line)
-        brand_match_zst = re.search(r"(安耐晒|安热沙|蓝胖子|红腰子|悦薇)", line)
+        brand_match_hlzm = re.search(r"(LAMER|Lamer|lamer|精粹水|精粹乳|精萃乳|海南之谜|舒缓喷雾|浓缩精华|经典面霜)", line)
+        brand_match_zst = re.search(r"(安耐晒|安热沙|蓝胖子|红腰子|悦薇|百优|百忧)", line)
         brand_match_cpb = re.search(r"(cpb|肌肤之钥|CPB|Cpb)", line)
-        brand_match_whoo = re.search(r"(whoo)", line)
+        brand_match_whoo = re.search(r"(whoo|天气丹)", line)
         brand_match_tf = re.search(r"(TF|Tf|tf|tom ford|Tom Ford|TOM FORD|乌木)", line)
         brand_match_xsl = re.search(r"(希思黎|sisley|Sisley|全能乳)", line)
         brand_match_xlk = re.search(r"(修丽可|色修|紫米精华|CE精华|SCF抗氧)", line)
@@ -59,12 +59,13 @@ with open(input_file, 'r' , encoding='utf-8') as f:
         brand_match_amn = re.search(r"(玉龙茶香|黑曜石|黑钥匙|myway|MY WAY|My Way|my way|自我无界|大师|权力)", line)
         brand_match_ysl = re.search(r"(圣罗兰|YSL|ysl|Ysl|夜皇后|藏金)", line)
         brand_match_gucci = re.search(r"(Gucci|gucci|古驰)", line)
-        brand_match_hr = re.search(r"(Hr|HR|赫莲娜|黑绷带|白绷带|绿宝瓶|黑白绷带|小针管)", line)
+        brand_match_hr = re.search(r"(Hr|HR|赫莲娜|黑绷带|白绷带|绿宝瓶|黑白绷带|小针管|小露珠)", line)
         brand_match_sbcs = re.search(r"(衰败城市|牛郎|URBAN DECAY|Urban Decay|urban decay)", line)
         brand_match_ky = re.search(r"(寇依|蔻依|chole|chloe|Chloe|CHLOE|北国雪松|木兰诗语)", line)
         #brand_match_zml = re.search(r"(祖玛珑|祖马龙|蓝风铃|)", line)
         brand_match_phlg = re.search(r"(PENHALIGON'S|潘海利根|兽首)", line)
         brand_match_pola = re.search(r"(POLA|pola|Pola|宝丽|黑BA|黑ba|黑Ba)", line)
+        brand_match_zcx = re.search(r"(琥珀|琥珀卸妆油|柚子卸妆油|绿茶卸妆油)", line)
         
         if brand_match:
             brand = brand_match.group()
@@ -112,6 +113,8 @@ with open(input_file, 'r' , encoding='utf-8') as f:
             brand = "潘海利根"
         elif brand_match_pola:
             brand = "POLA 宝丽"
+        elif brand_match_zcx:
+            brand = "植村秀"
         else:
             brand = ""
             
