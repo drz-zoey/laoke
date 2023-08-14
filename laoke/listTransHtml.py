@@ -43,8 +43,8 @@ brand_match_lbn_pattern = re.compile(r'(莱伯妮|莱珀妮|LP|La Prairie)')
 # 正则表达式：匹配来源地
 source_pattern = re.compile(r'\((.*?)\)')
 
-#path = "C:\\Users\\John\\Desktop\\laoke\\laoke"
-path = "F:\Material\互助\code\laoke\example.txt"
+path = "C:\\Users\\John\\Desktop\\laoke\\laoke\\example.txt"
+#path = "F:\Material\互助\code\laoke\example.txt"
 
 # 读取文本，进行数据提取和匹配
 with open(path, 'r', encoding='utf-8') as f:
