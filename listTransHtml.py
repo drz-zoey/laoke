@@ -1,4 +1,5 @@
 import re
+import datetime
 
 # 正则表达式：匹配行末数字
 price_pattern = re.compile(r'\d+[.]?\d*$')
@@ -44,16 +45,20 @@ brand_match_lbn_pattern = re.compile(r'(莱伯妮|莱珀妮|LP|La Prairie)')
 source_pattern = re.compile(r'\((.*?)\)')
 
 #path = "C:\\Users\\John\\Desktop\\laoke\\laoke\\example.txt"
-#path = "F:\Material\互助\code\laoke\example.txt"
-path = "E:\Dai\lk\code\laoke\laoke\example.txt"
+path = "F:\Material\互助\code\laoke\example.txt"
+#path = "E:\Dai\lk\code\laoke\laoke\example.txt"
 
 # 读取文本，进行数据提取和匹配
 with open(path, 'r', encoding='utf-8') as f:
     # 读取文件内容并去除空白符
     lines = [line.strip() for line in f.readlines()]
 
-# 定义数据表格
+# 时间
+today = datetime.date.today()
+
+# 主体数据表格
 table_data = []
+unknown_table_data = []
 
 # 遍历每行文本，进行正则匹配
 for line in lines:
@@ -178,17 +183,35 @@ for line in lines:
         table_data.append([name, price, brand, source])
     else:
         # 将匹配失败的行加入失败项数据表格
-        table_data.append([line, '', '', ''])
+        unknown_table_data.append([line])
+
+# html文件名称
+table_name = "table_" + today.strftime("%Y-%m-%d") + ".html"
+unknown_table_name = "unknown_table_" + today.strftime("%Y-%m-%d") + ".html"
 
 # 将数据表格转换为HTML表格
-table_html = "<table><tr><th>商品名称</th><th>价格</th><th>品牌</th><th>来源地</th></tr>"
+table_html = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>每日超值美妆</title><link rel=\"stylesheet\" href=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css\"> <script src=\"https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js\"></script> + \
+	          <script src=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script></head><body><table class=\"table table-striped\"><tr><th>商品名称</th><th>价格</th><th>品牌</th><th>来源地</th></tr>"
 for row in table_data:
     table_html += "<tr>"
     for col in row:
         table_html += "<td>" + str(col) + "</td>"
     table_html += "</tr>"
-table_html += "</table>"
+table_html += "</table></body></html>"
 
 # 将HTML表格输出为HTML文件
-with open("table.html", 'w', encoding='utf-8') as f:
+with open(table_name, 'w', encoding='utf-8') as f:
     f.write(table_html)
+
+# 将数据表格转换为HTML表格
+unknow_table_html = "<table><tr><th>未识别文本</th></tr>"
+for row in unknown_table_data:
+    unknow_table_html += "<tr>"
+    for col in row:
+        unknow_table_html += "<td>" + str(col) + "</td>"
+    unknow_table_html += "</tr>"
+unknow_table_html += "</table>"
+
+# 输出未识别内容
+with open(unknown_table_name, 'w', encoding='utf-8') as f:
+    f.write(unknow_table_html)
