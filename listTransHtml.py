@@ -42,7 +42,7 @@ brand_match_lbn_pattern = re.compile(r'(莱伯妮|莱珀妮|LP|La Prairie)')
 
 
 # 正则表达式：匹配来源地
-source_pattern = re.compile(r'\((.*?)\)')
+source_pattern = re.compile(r'\（(.*?)\）')
 
 #path = "C:\\Users\\John\\Desktop\\laoke\\laoke\\example.txt"
 path = "F:\Material\互助\code\laoke\example.txt"
@@ -58,6 +58,7 @@ today = datetime.date.today()
 
 # 主体数据表格
 table_data = []
+internal_table_data = []
 unknown_table_data = []
 
 # 遍历每行文本，进行正则匹配
@@ -180,18 +181,20 @@ for line in lines:
             source = ''
             
         # 将提取到的信息添加至数据表格
-        table_data.append([name, price, brand, source])
+        table_data.append([name, price, brand])
+        internal_table_data.append([name, price, brand, source])
     else:
         # 将匹配失败的行加入失败项数据表格
         unknown_table_data.append([line])
 
 # html文件名称
-table_name = "table_" + today.strftime("%Y-%m-%d") + ".html"
-unknown_table_name = "unknown_table_" + today.strftime("%Y-%m-%d") + ".html"
+table_name = today.strftime("%Y%m%d") + "_table"  + ".html"
+internal_table_name = today.strftime("%Y%m%d") + "_internal_table" + ".html"
+unknown_table_name = today.strftime("%Y%m%d") + "_unknown_table" + ".html"
 
 # 将数据表格转换为HTML表格
-table_html = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>每日超值美妆</title><link rel=\"stylesheet\" href=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css\"> <script src=\"https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js\"></script> + \
-	          <script src=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script></head><body><table class=\"table table-striped\"><tr><th>商品名称</th><th>价格</th><th>品牌</th><th>来源地</th></tr>"
+table_html = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>每日超值美妆</title><link rel=\"stylesheet\" href=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css\"> <link rel=\"stylesheet\" href=\"table_style.css\"> <script src=\"https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js\"></script> + \
+	          <script src=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script></head><body  style=\"width: 800px;\"><img src=\"./cover.png\" style=\"width: 800px; height: 480;\" ><table class=\"table table-striped\"><tr><th>商品名称</th><th>价格</th><th>品牌</th></tr>"
 for row in table_data:
     table_html += "<tr>"
     for col in row:
@@ -212,6 +215,19 @@ for row in unknown_table_data:
     unknow_table_html += "</tr>"
 unknow_table_html += "</table>"
 
-# 输出未识别内容
+# 内部版本（含来源）
 with open(unknown_table_name, 'w', encoding='utf-8') as f:
     f.write(unknow_table_html)
+
+internal_table_html = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>每日超值美妆</title><link rel=\"stylesheet\" href=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css\"> <script src=\"https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js\"></script> + \
+	          <script src=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script></head><body><table class=\"table table-striped\"><tr><th>商品名称</th><th>价格</th><th>品牌</th><th>来源地</th></tr>"
+for row in internal_table_data:
+    internal_table_html += "<tr>"
+    for col in row:
+        internal_table_html += "<td>" + str(col) + "</td>"
+    internal_table_html += "</tr>"
+internal_table_html += "</table></body></html>"
+
+# 将HTML表格输出为HTML文件
+with open(internal_table_name, 'w', encoding='utf-8') as f:
+    f.write(internal_table_html)
