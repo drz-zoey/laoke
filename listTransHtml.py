@@ -45,7 +45,7 @@ brand_match_lbn_pattern = re.compile(r'(莱伯妮|莱珀妮|LP|La Prairie)')
 source_pattern = re.compile(r'\（(.*?)\）')
 
 #path = "C:\\Users\\John\\Desktop\\laoke\\laoke\\example.txt"
-path = "F:\Material\互助\code\laoke\example.txt"
+path = "F:\Material\互助\code\laoke\laoke\\note_1.txt"
 #path = "E:\Dai\lk\code\laoke\laoke\example.txt"
 
 # 读取文本，进行数据提取和匹配
@@ -63,49 +63,61 @@ unknown_table_data = []
 
 # 遍历每行文本，进行正则匹配
 for line in lines:
+    # 0918按空格分割字符 
+    # 适用格式：第一部分为实际价格 第二部分为组合价格   xxx100 5起400
+    split_line = line.split(" ")
+    deal_line = ""
+    package_price = ""
+    if len(split_line) >= 2 :
+        deal_line = split_line[0]
+        package_price = split_line[1]
+    else:
+        deal_line = line
+
     # 匹配价格
-    price_match = re.findall(price_pattern, line)
+    price_match = re.findall(price_pattern, deal_line)
     if price_match:
         # 提取价格
         price = float(price_match[-1])
+        print("line:", line, " deal:" , deal_line, " pack:", package_price)
         
         # 提取商品名称，即行中除最后一个数字和空白符的部分
-        name = re.sub(price_pattern, '', line).strip()
+        name = re.sub(price_pattern, '', deal_line).strip()
         
         # 匹配品牌
-        brand_match = re.findall(brand_pattern, line)
+        brand_match = re.findall(brand_pattern, deal_line)
 
-        brand_match_skii = re.findall(brand_match_skii_pattern, line)
-        brand_match_ysld = re.findall(brand_match_ysld_pattern, line)
-        brand_match_hlzm = re.findall(brand_match_hlzm_pattern, line)
-        brand_match_zst = re.findall(brand_match_zst_pattern, line)
-        brand_match_cpb = re.findall(brand_match_cpb_pattern, line)
-        brand_match_whoo = re.findall(brand_match_whoo_pattern, line)
-        brand_match_tf = re.findall(brand_match_tf_pattern, line)
-        brand_match_xsl = re.findall(brand_match_xsl_pattern, line)
-        brand_match_xlk = re.findall(brand_match_xlk_pattern, line)
-        brand_match_ahc = re.findall(brand_match_ahc_pattern, line)
-        brand_match_nars = re.findall(brand_match_nars_pattern, line)
-        brand_match_msmjl = re.findall(brand_match_msmjl_pattern, line)
-        brand_match_lk = re.findall(brand_match_lk_pattern, line)
-        brand_match_kys = re.findall(brand_match_kys_pattern, line)
-        brand_match_qb = re.findall(brand_match_qb_pattern, line)
-        brand_match_amn = re.findall(brand_match_amn_pattern, line)
-        brand_match_ysl = re.findall(brand_match_ysl_pattern, line)
-        brand_match_gucci = re.findall(brand_match_gucci_pattern, line)
-        brand_match_hr = re.findall(brand_match_hr_pattern, line)
-        brand_match_sbcs = re.findall(brand_match_sbcs_pattern, line)
-        brand_match_ky = re.findall(brand_match_ky_pattern, line)
-        brand_match_zml = re.findall(brand_match_zml_pattern, line)
-        brand_match_phlg = re.findall(brand_match_phlg_pattern, line)
-        brand_match_pola = re.findall(brand_match_pola_pattern, line)
-        brand_match_zcx = re.findall(brand_match_zcx_pattern, line)
-        brand_match_ams = re.findall(brand_match_ams_pattern, line)
-        brand_match_xne = re.findall(brand_match_xne_pattern, line)
-        brand_match_jys = re.findall(brand_match_jys_pattern, line)
-        brand_match_lyw = re.findall(brand_match_lyw_pattern, line)
-        brand_match_boq = re.findall(brand_match_boq_pattern, line)
-        brand_match_lbn = re.findall(brand_match_lbn_pattern, line)
+        brand_match_skii = re.findall(brand_match_skii_pattern, deal_line)
+        brand_match_ysld = re.findall(brand_match_ysld_pattern, deal_line)
+        brand_match_hlzm = re.findall(brand_match_hlzm_pattern, deal_line)
+        brand_match_zst = re.findall(brand_match_zst_pattern, deal_line)
+        brand_match_cpb = re.findall(brand_match_cpb_pattern, deal_line)
+        brand_match_whoo = re.findall(brand_match_whoo_pattern, deal_line)
+        brand_match_tf = re.findall(brand_match_tf_pattern, deal_line)
+        brand_match_xsl = re.findall(brand_match_xsl_pattern, deal_line)
+        brand_match_xlk = re.findall(brand_match_xlk_pattern, deal_line)
+        brand_match_ahc = re.findall(brand_match_ahc_pattern, deal_line)
+        brand_match_nars = re.findall(brand_match_nars_pattern, deal_line)
+        brand_match_msmjl = re.findall(brand_match_msmjl_pattern, deal_line)
+        brand_match_lk = re.findall(brand_match_lk_pattern, deal_line)
+        brand_match_kys = re.findall(brand_match_kys_pattern, deal_line)
+        brand_match_qb = re.findall(brand_match_qb_pattern, deal_line)
+        brand_match_amn = re.findall(brand_match_amn_pattern, deal_line)
+        brand_match_ysl = re.findall(brand_match_ysl_pattern, deal_line)
+        brand_match_gucci = re.findall(brand_match_gucci_pattern, deal_line)
+        brand_match_hr = re.findall(brand_match_hr_pattern, deal_line)
+        brand_match_sbcs = re.findall(brand_match_sbcs_pattern, deal_line)
+        brand_match_ky = re.findall(brand_match_ky_pattern, deal_line)
+        brand_match_zml = re.findall(brand_match_zml_pattern, deal_line)
+        brand_match_phlg = re.findall(brand_match_phlg_pattern, deal_line)
+        brand_match_pola = re.findall(brand_match_pola_pattern, deal_line)
+        brand_match_zcx = re.findall(brand_match_zcx_pattern, deal_line)
+        brand_match_ams = re.findall(brand_match_ams_pattern, deal_line)
+        brand_match_xne = re.findall(brand_match_xne_pattern, deal_line)
+        brand_match_jys = re.findall(brand_match_jys_pattern, deal_line)
+        brand_match_lyw = re.findall(brand_match_lyw_pattern, deal_line)
+        brand_match_boq = re.findall(brand_match_boq_pattern, deal_line)
+        brand_match_lbn = re.findall(brand_match_lbn_pattern, deal_line)
 
         if brand_match:
             brand = brand_match[0]
@@ -182,10 +194,14 @@ for line in lines:
             
         # 将提取到的信息添加至数据表格
         table_data.append([name, price, brand])
-        internal_table_data.append([name, price, brand, source])
+        internal_table_data.append([name, price, package_price, brand, source])
     else:
         # 将匹配失败的行加入失败项数据表格
         unknown_table_data.append([line])
+
+# 排序
+table_data.sort(key=lambda x:x[2])
+internal_table_data.sort(key=lambda x:x[3])
 
 # html文件名称
 table_name = today.strftime("%Y%m%d") + "_table"  + ".html"
@@ -220,7 +236,7 @@ with open(unknown_table_name, 'w', encoding='utf-8') as f:
     f.write(unknow_table_html)
 
 internal_table_html = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>每日超值美妆</title><link rel=\"stylesheet\" href=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css\"> <script src=\"https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js\"></script> + \
-	          <script src=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script></head><body><table class=\"table table-striped\"><tr><th>商品名称</th><th>价格</th><th>品牌</th><th>来源地</th></tr>"
+	          <script src=\"https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js\"></script></head><body><table class=\"table table-striped\"><tr><th>商品名称</th><th>价格</th><th>组合价格/期限</><th>品牌</th><th>来源地</th></tr>"
 for row in internal_table_data:
     internal_table_html += "<tr>"
     for col in row:
