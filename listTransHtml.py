@@ -5,12 +5,12 @@ import datetime
 price_pattern = re.compile(r'\d+[.]?\d*$')
 
 # 正则表达式：匹配品牌
-brand_pattern = re.compile(r'兰蔻|卡诗|雅诗兰黛|卡地亚|玫珂菲|圣罗兰|蒂佳婷|cpb肌肤之钥|海蓝之谜|娇韵诗|阿玛尼|赫莲娜|科颜氏|Gucci|倩碧|黛珂|资生堂|馥蕾诗|欧莱雅|迪奥|莱珀妮|赫莲娜|娇兰|SK-II|植村秀|Tom Ford|NARS|MAC|魅可|whoo后|雅萌|ahc|飞利浦|百瑞德|兰芝|香奈儿|银座|菲拉格慕|衰败城市|伊菲丹|芭比布朗|祖玛龙|希思黎|碧欧泉|欧舒丹|修丽可|爱马仕|蔻依|祖玛珑|梅森马吉拉')
+brand_pattern = re.compile(r'雅顿|兰蔻|卡诗|雅诗兰黛|卡地亚|玫珂菲|圣罗兰|蒂佳婷|cpb肌肤之钥|海蓝之谜|娇韵诗|阿玛尼|赫莲娜|科颜氏|Gucci|倩碧|黛珂|资生堂|馥蕾诗|欧莱雅|迪奥|莱珀妮|赫莲娜|娇兰|SK-II|植村秀|Tom Ford|NARS|MAC|魅可|whoo后|雅萌|ahc|飞利浦|百瑞德|兰芝|香奈儿|银座|菲拉格慕|衰败城市|伊菲丹|芭比布朗|祖玛龙|希思黎|碧欧泉|欧舒丹|修丽可|爱马仕|蔻依|祖玛珑|梅森马吉拉')
 
 #根据单品名称匹配品牌
 brand_match_skii_pattern = re.compile(r'(SK2|sk2|skii|sk-ii|skll|晶莹露|眼面套|神灯套|小灯泡|神仙水|大红瓶|前男友|甄选三件套|增选3件套)')
-brand_match_ysld_pattern = re.compile(r'(增量五件套|抗衰|红石榴|小棕瓶|蓝光眼霜|抗蓝光|眼绷带|白金眼霜|白金粉底液|沁水|dw|原生液|樱花水|智妍|抗衰老|黑松露|白金面霜)')
-brand_match_hlzm_pattern = re.compile(r'(LAMER|Lamer|lamer|绿眼霜|精粹水|精粹乳|精萃乳|海南之谜|舒缓喷雾|浓缩精华|经典面霜)')
+brand_match_ysld_pattern = re.compile(r'(增量五件套|抗衰|红石榴|小棕瓶|蓝光眼霜|抗蓝光|眼绷带|白金眼霜|白金粉底液|沁水|dw|原生液|樱花水|智妍|抗衰老|黑松露|白金面霜|白金洁面|棕瓶)')
+brand_match_hlzm_pattern = re.compile(r'(LAMER|Lamer|lamer|绿眼霜|精粹水|精粹乳|精萃乳|海南之谜|舒缓喷雾|浓缩精华|经典面霜|白眼霜|绿眼霜)')
 brand_match_zst_pattern = re.compile(r'(安耐晒|安热沙|蓝胖子|红腰子|悦薇|百优|百忧)')
 brand_match_cpb_pattern = re.compile(r'(cpb|肌肤之钥|CPB|Cpb|长管隔离)')
 brand_match_whoo_pattern = re.compile(r'(whoo|天气丹|天率丹|拱辰享|津率享)')
@@ -22,7 +22,7 @@ brand_match_nars_pattern = re.compile(r'(nars|Nars|纳斯|超方瓶|大白饼)')
 brand_match_msmjl_pattern = re.compile(r'(马吉拉|梅森马吉拉|慵懒周末)')
 brand_match_lk_pattern = re.compile(r'(小白管|菁纯|箐纯|小黑瓶|大眼精华|发光眼霜|肌底液|雪花霜|粉水|极光|持妆|是我|三件套带水|带水三件套|小蛮腰)')
 brand_match_kys_pattern = re.compile(r'(金盏花|宝宝霜|高保湿|白泥|紫波A面霜|爱海南三件套|淡斑精华)')
-brand_match_qb_pattern = re.compile(r'(倩碧|紫光|镭射)')
+brand_match_qb_pattern = re.compile(r'(倩碧|紫光|镭射|紫胖子)')
 brand_match_amn_pattern = re.compile(r'(玉龙茶香|黑曜石|黑钥匙|myway|MY WAY|My Way|my way|自我无界|大师|权力)')
 brand_match_ysl_pattern = re.compile(r'(圣罗兰|YSL|ysl|Ysl|yls|夜皇后|藏金|粉气垫|皮气垫|小金条|小黑条|小粉条)')
 brand_match_gucci_pattern = re.compile(r'(Gucci|gucci|古驰)')
@@ -39,6 +39,7 @@ brand_match_jys_pattern = re.compile(r'(娇韵诗|双萃|弹簧水)')
 brand_match_lyw_pattern = re.compile(r'(罗意威|Loewe|loewe)')
 brand_match_boq_pattern = re.compile(r'(碧欧泉|水动力)')
 brand_match_lbn_pattern = re.compile(r'(莱伯妮|莱珀妮|LP|La Prairie)')
+brand_match_ipsa_pattern = re.compile(r'(ipsa|IPSA|Ipsa|茵芙纱|茵芙莎|流金水|三色遮瑕)')
 
 
 # 正则表达式：匹配来源地
@@ -118,6 +119,7 @@ for line in lines:
         brand_match_lyw = re.findall(brand_match_lyw_pattern, deal_line)
         brand_match_boq = re.findall(brand_match_boq_pattern, deal_line)
         brand_match_lbn = re.findall(brand_match_lbn_pattern, deal_line)
+        brand_match_ipsa = re.findall(brand_match_ipsa_pattern, deal_line)
 
         if brand_match:
             brand = brand_match[0]
@@ -181,6 +183,8 @@ for line in lines:
             brand = "碧欧泉"
         elif brand_match_lbn:
             brand = "莱铂妮"
+        elif brand_match_ipsa:
+            brand = "IPSA茵芙莎"
         else:
             brand = ""
 
